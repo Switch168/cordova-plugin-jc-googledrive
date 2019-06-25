@@ -387,18 +387,7 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
     private void fileList(final boolean appFolder) {
         /* Allowed MIME types: https://developers.google.com/drive/v3/web/mime-types */
         Query.Builder qb = new Query.Builder();
-        qb.addFilter(Filters.and(
-          Filters.and(Filters.eq(SearchableField.TRASHED, false)),
-          Filters.or(
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.folder"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.photo"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.video"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.audio"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.file"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.unknown")
-            )
-          )
-        );
+        qb.addFilter(Filters.and(Filters.and(Filters.eq(SearchableField.TRASHED, false))));
 
         if(appFolder) {
             DriveId appFolderId = Drive.DriveApi.getAppFolder(mGoogleApiClient).getDriveId();

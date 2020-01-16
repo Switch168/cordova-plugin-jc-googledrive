@@ -5,7 +5,11 @@
 #import "AppDelegate.h"
 
 
-static NSString *kClientID = @"";
+// Manually fix 
+// ERROR ITMS-90158: "The following URL schemes found in your app are not in the correct format: [xxxx]. URL schemes need to begin with an alphabetic character, and be comprised of alphanumeric characters, the period, the hyphen or the plus sign only. Please see RFC1738 for more detail."
+// BY OVERRIDING THIS FILE after build
+
+static NSString *kClientID = @"YOUR_CLIENT_ID.apps.googleusercontent.com";
 static NSString *kRedirectURI =@":/oauthredirect";
 static NSString *kAuthorizerKey = @"";
 
@@ -20,9 +24,9 @@ static NSString *kAuthorizerKey = @"";
     NSLog(@"%@",kAuthorizerKey);
     NSMutableArray *ids = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
     NSArray *reversedClientId = [ids filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"CFBundleURLName == %@", @"reversedClientId"]];
-    NSArray *clientId = [ids filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"CFBundleURLName == %@", @"clientId"]];
+    // NSArray *clientId = [ids filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"CFBundleURLName == %@", @"clientId"]];
     kRedirectURI = [[[[reversedClientId valueForKey:@"CFBundleURLSchemes"] objectAtIndex:0 ] objectAtIndex:0] stringByAppendingString:kRedirectURI];
-    kClientID = [[[clientId valueForKey:@"CFBundleURLSchemes"] objectAtIndex:0 ] objectAtIndex:0];
+    // kClientID = [[[clientId valueForKey:@"CFBundleURLSchemes"] objectAtIndex:0 ] objectAtIndex:0];
     [self loadState];
     //NSLog(@"%@",kRedirectURI);
     //NSLog(@"%@",kClientID);

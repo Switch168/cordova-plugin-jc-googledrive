@@ -33,7 +33,6 @@
         <preference name="IOS_CLIENT_ID" />
         <preference name="IOS_REVERSED_CLIENT_ID" />
 
-        <dependency id="cordova-plugin-cocoapod-support" />
 
         <config-file target="config.xml" parent="/*">
             <feature name="GoogleDrive">
@@ -42,8 +41,7 @@
             </feature>
         </config-file>
 
-        <pod id='GoogleAPIClientForREST/Drive' />
-        <pod id="GTMAppAuth" />
+    
 
         <config-file target="*-Info.plist" parent="CFBundleURLTypes">
             <array>

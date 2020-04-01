@@ -9,8 +9,9 @@
 // ERROR ITMS-90158: "The following URL schemes found in your app are not in the correct format: [xxxx]. URL schemes need to begin with an alphabetic character, and be comprised of alphanumeric characters, the period, the hyphen or the plus sign only. Please see RFC1738 for more detail."
 // BY OVERRIDING THIS FILE after build
 
+// YOUR_CLIENT_ID gets replaced by sed
 static NSString *kClientID = @"YOUR_CLIENT_ID.apps.googleusercontent.com";
-static NSString *kRedirectURI =@":/oauthredirect";
+static NSString *kRedirectURI =@"com.googleusercontent.apps.YOUR_CLIENT_ID:/oauthredirect";
 static NSString *kAuthorizerKey = @"";
 
 @interface GoogleDrive () <OIDAuthStateChangeDelegate,OIDAuthStateErrorDelegate>
@@ -23,9 +24,9 @@ static NSString *kAuthorizerKey = @"";
     kAuthorizerKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
     NSLog(@"%@",kAuthorizerKey);
     NSMutableArray *ids = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
-    NSArray *reversedClientId = [ids filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"CFBundleURLName == %@", @"reversedClientId"]];
+    // NSArray *reversedClientId = [ids filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"CFBundleURLName == %@", @"reversedClientId"]];
     // NSArray *clientId = [ids filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"CFBundleURLName == %@", @"clientId"]];
-    kRedirectURI = [[[[reversedClientId valueForKey:@"CFBundleURLSchemes"] objectAtIndex:0 ] objectAtIndex:0] stringByAppendingString:kRedirectURI];
+    // kRedirectURI = [[[[reversedClientId valueForKey:@"CFBundleURLSchemes"] objectAtIndex:0 ] objectAtIndex:0] stringByAppendingString:kRedirectURI];
     // kClientID = [[[clientId valueForKey:@"CFBundleURLSchemes"] objectAtIndex:0 ] objectAtIndex:0];
     [self loadState];
     //NSLog(@"%@",kRedirectURI);
